@@ -378,8 +378,8 @@
         </div>
     </section>
     <!--Customize-->
-    <div id="orderModal" class="fixed hidden inset-0 md:p-2 z-50 flex items-center justify-center bg-[#D9D9D9] bg-opacity-10 ">
-        <div class="modal-content bg-[#D9D9D9] rounded-lg h-full w-full ">
+    <div id="orderModal" class="fixed hidden inset-0 md:p-5 z-50  items-center justify-center  bg-[#D9D9D9] bg-opacity-10  overflow-y-scroll ">
+        <div class="modal-content bg-[#D9D9D9] rounded-lg h-auto w-full border shadow-lg shadow-white">
             <div class="bg-slate-900 w-full h-3 rounded-tl-md rounded-tr-md "></div>
             <div class="flex justify-between w-full px-2 py-1 border-b-2 border-slate-300">
                 <div class="md:text-xl text-sm font-bold ">SELECTED ASSETS</div>
@@ -388,9 +388,9 @@
                 </div>
             </div>
         
-            <div class="md:flex p-2 md:p-10 overflow-y-scroll">
+            <div class="md:flex p-2 md:p-5 w-full h-auto">
                 
-                <div class="w-full p-2">
+                <div class="w-full h-auto">
                     <div id="content2" class="firstdiv2 rounded-md mx-auto w-[350px] lg:h-[650px] md:w-[500px] border-[3px] bg-slate-500 border-black md:p-5 p-2">
                        
                         <div class="relative w-auto ">
@@ -440,7 +440,80 @@
                     </div>
                 </div>
                 <div class=" w-full p-10 bg-slate-100">
-
+               
+                            <div class=" bg-slate-200 rounded-lg shadow-md  shadow-black w-auto">
+                                <div class="md:text-2xl text-[15px] text-center font-semibold rounded-tl-lg rounded-tr-lg w-full p-2 md:p-5 bg-[#161616f0] text-yellow-50">ADD TO YOUR ORDER</div>
+                                
+                                    <div class=" p-2 ">
+                                        <form action="" method="">
+                                        <div class="md:p-2 p-2 md:h-64  h-32 bg-white shadow-black shadow-inner rounded-md  overflow-y-auto">
+                                            <div class="flex justify-between">
+                                                <div class="text-sm text-slate-700 py-2 px-2">Add assets here.</div>
+                                                <button id="addInput" type="button" class=" py-1 px-3  md:px-4 md:text-xl text-[13px] hover:bg-green-700 duration-300 rounded-md shadow-md text-white hover:scale-95 shadow-slate-600 bg-slate-900">ADD</button>
+                                            </div>
+                                                <div id="inputContainer" class="md:mt-13 mt-5 space-y-2">
+                                                    <!--ASSETS ADDED-->
+                                                </div>
+                                        </div>
+                                        <div class="">
+                                            <div class="text-sm font-medium p-2 md:text-xl">ORDER NOTES</div>
+                                                <div class=" ">
+                                                    <textarea name="" placeholder=" type your gcash name here and your order notes... " id="notes" cols="" rows="" class="w-full h-16  md:h-24 rounded-md shadow-inner shadow-gray-900"></textarea>
+                                                </div>
+                                        </div>
+                                       
+                                        <div class="lg:flex items-center right-0  justify-between">
+                                            
+                                            <div class="lg:mt-10 md:mt-2  ">
+                                                <div class="font-medium p-1 text-black  ">Input payment Screenshot here </div>
+                                                <div class="md:flex gap-2">
+                                                    <div class="">
+                                                        <input type="file" name="" id="paymentScreenshot" class="w-full text-white bg-slate-900 rounded-md p-1">
+                                                    </div>
+                                                  
+                                                    <button id="orderButton" type="button" class="btnords p-2 md:mt-0 mt-2 bg-slate-800 rounded-md font-medium text-white  ">SCAN ME</button>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class=" p-1  ">
+                                                <div id="tentaprice" class="totalpay textpay font-bold text-4xl text-center text-yellow-500">0</div>
+                                                <div id="fixedprice" class="totalpay2 textpay font-bold text-4xl text-center text-yellow-500" style="display: none;">0</div>
+                                                <div class="p-2 text-center font-bold md:text-[15px] text-[10px]  ">
+                                                    TOTAL:
+                                                </div>
+                                                <div class="gap-1 lg:justify-normal flex justify-center ">
+                                                    <button id="incrementBtn" onclick="updateTotalPrice()" type="button" class=" px-3 py-1 font-bold text-xl hover:scale-95 text-white duration-300 hover:bg-green-600 rounded-md bg-slate-900">+</button>
+                                                    <input type="number" name="" value="1" min="1" id="count" onchange="multiply()" placeholder="0" class=" w-16 font-semibold appearance-none rounded-md mx-2">
+                                                    <button id="decrementBtn" onclick="updateTotalPrice2()" type="button" class="px-3 py-1 font-bold text-xl hover:scale-95 text-white duration-300 hover:bg-red-500 rounded-md bg-slate-900">−</button>
+                                                    
+                                                </div>  
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between pt-2">
+                                            <button id="cancelOrderBtn" type="button" class="p-2  hover:bg-red-500 bg-slate-500 hover:scale-95 font-semibold text-white rounded-md">CLOSE</button>
+                                            <button id="orderButtonSubmit" type="button" class="p-2 bg-slate-900 hover:bg-green-500 hover:scale-95 font-semibold text-white rounded-md">ORDER NOW</button>
+                                        </div>
+                                    </form>
+                                <!-- Modal content -->
+                                    <div id="myModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                                        <div class="bg-white p-1 md:p-2 rounded-lg h-auto">
+                                          <div class="md:text-2xl text-xl font-bold text-center p-5">
+                                            SCAN TO PAY
+                                          </div>
+                                         
+                                          <div class="md:flex w-auto">
+                                            <div class=" flex justify-center">
+                                                <img src="/janeiwebsite/assets/qrcode.png" class="h-56 md:h-72 " alt="" srcset="">
+                                            </div>   
+                                          </div>
+                                          <div class="text-center font-medium p-1">Down payment is acceptable.</div>
+                                          
+                                        </div>
+                                      </div>
+                                    </div>
+                                
+                         
+                
                 </div>
             </div>
            
@@ -563,15 +636,15 @@
                                                 
                                             </div>
                                             <div class=" p-1  ">
-                                                <div class="totalpay textpay font-bold text-4xl text-center text-yellow-500">0</div>
-                                                <div class="totalpay2 textpay font-bold text-4xl text-center text-yellow-500" style="display: none;">0</div>
+                                                <div id="tentaprice" class="totalpay textpay font-bold text-4xl text-center text-yellow-500">0</div>
+                                                <div id="fixedprice" class="totalpay2 textpay font-bold text-4xl text-center text-yellow-500" style="display: none;">0</div>
                                                 <div class="p-2 text-center font-bold md:text-[15px] text-[10px]  ">
                                                     TOTAL:
                                                 </div>
                                                 <div class="gap-1 lg:justify-normal flex justify-center ">
-                                                    <button id="incrementBtn" type="button" class=" px-3 py-1 font-bold text-xl hover:scale-95 text-white duration-300 hover:bg-green-600 rounded-md bg-slate-900">+</button>
-                                                    <input type="number" name="" id="count" placeholder="0" class=" w-16 font-semibold appearance-none rounded-md mx-2">
-                                                    <button id="decrementBtn" type="button" class="px-3 py-1 font-bold text-xl hover:scale-95 text-white duration-300 hover:bg-red-500 rounded-md bg-slate-900">−</button>
+                                                    <button id="incrementBtn" onclick="updateTotalPrice()" type="button" class=" px-3 py-1 font-bold text-xl hover:scale-95 text-white duration-300 hover:bg-green-600 rounded-md bg-slate-900">+</button>
+                                                    <input type="number" name="" value="1" min="1" id="count" onchange="multiply()" placeholder="0" class=" w-16 font-semibold appearance-none rounded-md mx-2">
+                                                    <button id="decrementBtn" onclick="updateTotalPrice2()" type="button" class="px-3 py-1 font-bold text-xl hover:scale-95 text-white duration-300 hover:bg-red-500 rounded-md bg-slate-900">−</button>
                                                     
                                                 </div>  
                                             </div>
@@ -693,6 +766,55 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script>
+
+    //Incremenet
+    function updateTotalPrice() {
+        // const templatePriceText = document.querySelector('.totalpay').textContent;
+        // const templatePriceText2 = document.querySelector('.totalpay2').textContent;
+        // const templatePrice = parseFloat(templatePriceText);
+        // const templatePrice2 = parseFloat(templatePriceText2);
+        // let totalCount = parseInt(document.getElementById("count").value);
+
+        // totalPrice = templatePrice  + templatePrice2;
+        // document.querySelector(".totalpay").textContent = totalPrice.toFixed(2);
+
+        
+
+        const val = parseInt(document.getElementById("count").value) + 1;
+
+        document.getElementById("count").value = val;
+
+        document.getElementById('tentaprice').innerText = `${ document.getElementById('count').value * parseFloat(document.getElementById('fixedprice').innerText) }`;
+
+    }
+    //Decrement
+    function updateTotalPrice2() {
+        // const templatePriceText = document.querySelector('.totalpay').textContent;
+        // const templatePriceText2 = document.querySelector('.totalpay2').textContent;
+        // const templatePrice = parseFloat(templatePriceText);
+        // const templatePrice2 = parseFloat(templatePriceText2);
+        // let totalCount = parseInt(document.getElementById("count").value);
+
+        // totalPrice = templatePrice - templatePrice2;
+        // document.querySelector(".totalpay").textContent = totalPrice.toFixed(2);
+        const val = parseInt(document.getElementById("count").value) - 1;
+
+        if(val < 1) return;
+
+        document.getElementById("count").value = val;
+
+        document.getElementById('tentaprice').innerText = `${ document.getElementById('count').value * parseFloat(document.getElementById('fixedprice').innerText) }`;
+        
+    }
+
+    function multiply(){ 
+
+        if(document.getElementById('count').value <= 1) document.getElementById('count').value = 1;
+
+        document.getElementById('tentaprice').innerText = `${ document.getElementById('count').value * parseFloat(document.getElementById('fixedprice').innerText) }`;
+    }
+
+
 //navbar
      const navLinks = document.querySelector('.nav-links')
         function onToggleMenu(e){

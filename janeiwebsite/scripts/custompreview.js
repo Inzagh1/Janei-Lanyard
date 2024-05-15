@@ -2,15 +2,16 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/fireba
 import { getDatabase, ref, onValue, set, push, get, child} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyByGsDfEcXJa2rTW0CG40XRLoa944XtI0I",
-    authDomain: "janeilanyarddb-9ba85.firebaseapp.com",
-    databaseURL: "https://janeilanyarddb-9ba85-default-rtdb.firebaseio.com",
-    projectId: "janeilanyarddb-9ba85",
-    storageBucket: "janeilanyarddb-9ba85.appspot.com",
-    messagingSenderId: "221726110604",
-    appId: "1:221726110604:web:73a171eb5277b900ca5ca9",
-    measurementId: "G-4YXSRNE3YW"
+    apiKey: "AIzaSyAVsbYPNtLVJRyin2lVtPixIK5HDUhi_M8",
+    authDomain: "janeidb-c4f19.firebaseapp.com",
+    databaseURL: "https://janeidb-c4f19-default-rtdb.firebaseio.com",
+    projectId: "janeidb-c4f19",
+    storageBucket: "janeidb-c4f19.appspot.com",
+    messagingSenderId: "1014883779092",
+    appId: "1:1014883779092:web:6fc333d075a454e96f1d01",
+    measurementId: "G-SG7JCHH82N"
   };
+  
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
@@ -102,11 +103,13 @@ function getTemplateData(templateId) {
 }
 
 // Add input field
-var inputCount = 1;
+let inputCount = 0;
 var totalPrice = 0;
 var totalpay = 0;
 var selectedTemplateName = null; 
 var imageStrings = [];
+const inputs = [];
+
 // Default input clicked cancel laman
 document.getElementById('inputContainer').addEventListener('click', function(event) {
     if (event.target.classList.contains('border-red-500')) {
@@ -128,15 +131,35 @@ document.getElementById('addInput').addEventListener('click', function() {
         newInput.className = 'w-full bg-slate-300 shadow-sm shadow-slate-900 md:p-2 p-1 rounded-md';
         inputField.appendChild(newInput);
 
+        var newInput2 = document.createElement('select');
+        newInput2.className = 'md:w-56 w-40 md:text-md text-sm bg-slate-800 text-white shadow-sm shadow-slate-900 md:p-2 p-1 rounded-md';
+        const op1 = document.createElement('option');
+        op1.innerText = 'Texture';
+        op1.value = 'Texture';
+        newInput2.appendChild(op1);
+        const op2 = document.createElement('option');
+        op2.innerText = 'Pattern';
+        op2.value = 'Pattern';
+        newInput2.appendChild(op2);
+        const op3 = document.createElement('option');
+        op3.innerText = 'Logo';
+        op3.value = 'Logo';
+        newInput2.appendChild(op3);
+        // newInput2.className = 'w-full bg-slate-300 shadow-sm shadow-slate-900 md:p-2 p-1 rounded-md';
+        inputField.appendChild(newInput2);
+
         // Add event listener to handle file selection
         newInput.addEventListener('change', function(event) {
             var file = event.target.files[0];
             var reader = new FileReader();
             reader.onload = function(event) {
                 var imageData = event.target.result;
-                imageStrings.push(imageData); // Store the base64 string of the image
+                imageStrings.push({
+                    data: imageData,
+                    type: newInput2.value
+                });     
             };
-            reader.readAsDataURL(file); 
+            reader.readAsDataURL(file);
         });
 
         // Cancel the inputted field
@@ -166,14 +189,16 @@ async function sendImagesToDatabase(orderId) {
     const assetsRef = ref(db, 'newOrders/' + orderId + '/cusAssets');
 
     // Map each image string to a promise of setting it in the database
-    const promises = imageStrings.map(async (imageData, index) => {
+    const promises = imageStrings.map(async (imageObj, index) => {
+        let { data: imageData, type } = imageObj;
         const base64Index = imageData.indexOf(',');
+
         if (base64Index !== -1) {
-            imageData = imageData.slice(base64Index + 1); 
+            imageData = imageData.slice(base64Index + 1);
         }
         const assetIndex = index + 1;
         const newAssetRef = child(assetsRef, assetIndex.toString());
-        await set(newAssetRef, { img: imageData });
+        await set(newAssetRef, { img: imageData, type: type });
     });
     await Promise.all(promises);
     imageStrings = [];
@@ -184,6 +209,8 @@ function clearInputContainer() {
     while (inputContainer.firstChild) {
         inputContainer.removeChild(inputContainer.firstChild);
     }
+
+    inputCount = 0;
 
     // Iterate over each input field inside the inputContainer
     var inputFields = document.querySelectorAll('#inputContainer input[type="file"]');
@@ -202,62 +229,39 @@ function clearInputContainer() {
   
 }
 // Counter
-document.addEventListener("DOMContentLoaded", function() {
-    const countElement = document.getElementById("count");
-    const incrementBtn = document.getElementById("incrementBtn");
-    const decrementBtn = document.getElementById("decrementBtn");
-    let count = 1;
+// document.addEventListener("DOMContentLoaded", function() {
+//     const countElement = document.getElementById("count");
+//     const incrementBtn = document.getElementById("incrementBtn");
+//     const decrementBtn = document.getElementById("decrementBtn");
+//     let count = 1;
 
-    function updateCount() {
-        countElement.value = count;
-        updateTotalPrice();
-    }
-    updateCount();
+//     function updateCount() {
+//         countElement.value = count;
+//         updateTotalPrice();
+//     }
+//     updateCount();
 
-    function updateCount2() {
-        countElement.value = count;
-        updateTotalPrice2();
-    }
-    updateCount2();
+//     function updateCount2() {
+//         countElement.value = count;
+//         updateTotalPrice2();
+//     }
+//     updateCount2();
 
-    incrementBtn.addEventListener("click", function() {
-        count++;
-        updateCount();
-    });
+//     incrementBtn.addEventListener("click", function() {
+//         count++;
+//         updateCount();
+//     });
 
-    decrementBtn.addEventListener("click", function() {
-        if (count > 1) {
-            count--;
-            updateCount2();
-        }
+//     decrementBtn.addEventListener("click", function() {
+//         if (count > 1) {
+//             count--;
+//             updateCount2();
+//         }
      
-    });
-});
+//     });
+// });
 // Update total price function
-//Incremenet
-function updateTotalPrice() {
-    const templatePriceText = document.querySelector('.totalpay').textContent;
-    const templatePriceText2 = document.querySelector('.totalpay2').textContent;
-    const templatePrice = parseFloat(templatePriceText);
-    const templatePrice2 = parseFloat(templatePriceText2);
-    let totalCount = parseInt(document.getElementById("count").value);
 
-    totalPrice = templatePrice  + templatePrice2;
-    document.querySelector(".totalpay").textContent = totalPrice.toFixed(2);
-
-}
-//Decrement
-function updateTotalPrice2() {
-    const templatePriceText = document.querySelector('.totalpay').textContent;
-    const templatePriceText2 = document.querySelector('.totalpay2').textContent;
-    const templatePrice = parseFloat(templatePriceText);
-    const templatePrice2 = parseFloat(templatePriceText2);
-    let totalCount = parseInt(document.getElementById("count").value);
-
-    totalPrice = templatePrice - templatePrice2;
-    document.querySelector(".totalpay").textContent = totalPrice.toFixed(2);
-    
-}
 // Modal order
 const orderButton = document.getElementById('orderButton');
 const modal = document.getElementById('myModal');
@@ -501,6 +505,7 @@ async function getLastChatId() {
         throw error;
     }   
 }
+
 
 document.getElementById("cancelOrderBtn").addEventListener("click", function() {
 

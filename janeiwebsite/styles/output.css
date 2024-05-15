@@ -1853,6 +1853,14 @@ select {
   width: 100%;
 }
 
+.w-80 {
+  width: 20rem;
+}
+
+.w-\[75\%\] {
+  width: 75%;
+}
+
 .max-w-4xl {
   max-width: 56rem;
 }
@@ -3613,6 +3621,10 @@ select {
   text-align: end;
 }
 
+.indent-2 {
+  text-indent: 0.5rem;
+}
+
 .align-baseline {
   vertical-align: baseline;
 }
@@ -3935,6 +3947,11 @@ select {
 .text-yellow-600 {
   --tw-text-opacity: 1;
   color: rgb(202 138 4 / var(--tw-text-opacity));
+}
+
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -5276,6 +5293,16 @@ select {
     padding-bottom: 1.75rem;
   }
 
+  .md\:px-20 {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+
+  .md\:py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
   .md\:pb-1 {
     padding-bottom: 0.25rem;
   }
@@ -5418,6 +5445,10 @@ select {
   .md\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-\[16px\] {
+    font-size: 16px;
   }
 
   .md\:font-medium {
