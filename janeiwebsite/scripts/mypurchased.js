@@ -91,6 +91,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 document.getElementById('templateIMG').appendChild(imgElement);
                                             } else {
                                                 console.log('Template not found for template ID:', templateId);
+                                                var imgElement = document.createElement('img');
+                                                imgElement.src = "/janeiwebsite/assets/a3.png";
+                                                imgElement.classList.add('w-full', 'h-full', 'object-cover', 'rounded-lg');
+                                                imgElement.alt = 'Template Image';
+                                                document.getElementById('templateIMG').appendChild(imgElement);
                                             }
                                         })
                                         .catch((error) => {

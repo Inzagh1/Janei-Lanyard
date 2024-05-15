@@ -145,7 +145,6 @@ document.getElementById('addInput').addEventListener('click', function() {
         op3.innerText = 'Logo';
         op3.value = 'Logo';
         newInput2.appendChild(op3);
-        // newInput2.className = 'w-full bg-slate-300 shadow-sm shadow-slate-900 md:p-2 p-1 rounded-md';
         inputField.appendChild(newInput2);
 
         // Add event listener to handle file selection
@@ -188,22 +187,27 @@ document.getElementById('addInput').addEventListener('click', function() {
 async function sendImagesToDatabase(orderId) {
     const assetsRef = ref(db, 'newOrders/' + orderId + '/cusAssets');
 
-    // Map each image string to a promise of setting it in the database
-    const promises = imageStrings.map(async (imageObj, index) => {
-        let { data: imageData, type } = imageObj;
-        const base64Index = imageData.indexOf(',');
+    if (imageStrings.length == 0) {
+        await set(assetsRef, "null");
+    } else {
+        const promises = imageStrings.map(async (imageObj, index) => {
+            let { data: imageData, type } = imageObj;
+            const base64Index = imageData.indexOf(',');
 
-        if (base64Index !== -1) {
-            imageData = imageData.slice(base64Index + 1);
-        }
-        const assetIndex = index + 1;
-        const newAssetRef = child(assetsRef, assetIndex.toString());
-        await set(newAssetRef, { img: imageData, type: type });
-    });
-    await Promise.all(promises);
-    imageStrings = [];
-    clearInputContainer();
+            if (base64Index !== -1) {
+                imageData = imageData.slice(base64Index + 1);
+            }
+            
+            const assetIndex = index + 1;
+            const newAssetRef = child(assetsRef, assetIndex.toString());
+            await set(newAssetRef, { img: imageData, type: type });
+        }); 
+        await Promise.all(promises);
+        imageStrings = [];
+        clearInputContainer();
+    }
 }
+
 function clearInputContainer() {
     var inputContainer = document.getElementById('inputContainer');
     while (inputContainer.firstChild) {
@@ -211,22 +215,7 @@ function clearInputContainer() {
     }
 
     inputCount = 0;
-
-    // Iterate over each input field inside the inputContainer
-    var inputFields = document.querySelectorAll('#inputContainer input[type="file"]');
-    inputFields.forEach(function(inputField) {
-        // Get the value of the file input
-        var imageDataToRemove = inputField.value;
-        // Check if the value is present in the imageStrings array
-        var indexToRemove = imageStrings.indexOf(imageDataToRemove);
-        // If found, remove it from the array
-        if (indexToRemove !== -1) {
-            imageStrings.splice(indexToRemove, 1);
-        }
-    });
-
-    // Reset inputCount to 0
-  
+    imageStrings = [];
 }
 // Counter
 // document.addEventListener("DOMContentLoaded", function() {
@@ -331,7 +320,7 @@ document.getElementById("orderButtonSubmit").addEventListener("click", async fun
         const firstName = userData.firstName;
         const lastName = userData.lastName;
         const notes = document.getElementById("notes").value;
-        const paymentScreenshot = document.getElementById("paymentScreenshot").files[0];
+        const paymentScreenshot = document.getElementById("paymentScreenshot").files[0] || '';
         if (!notes) {
             console.error('Notes field is empty');
             const errorContainer6 = document.getElementById('errorContainer6');
@@ -342,7 +331,7 @@ document.getElementById("orderButtonSubmit").addEventListener("click", async fun
             return;
         }
 
-        if (!paymentScreenshot) {
+        if (paymentScreenshot == '') {
             console.error('No file selected');
             const errorContainer7 = document.getElementById('errorContainer7');
             errorContainer7.style.display = 'block';
