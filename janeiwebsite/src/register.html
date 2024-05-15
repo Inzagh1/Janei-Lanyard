@@ -108,8 +108,9 @@
                                     </div>
                                     <div class="md:pt-1 lg:p-0 md:m-2 flex w-full justify-center md:justify-end">
                                         <label  for="checkbox" class="rounded lg:mr-2 md:mr-0 font-medium text-[13px] md:text-[14px] text-center md:text-left">
-                                            <input required type="checkbox" id="checkbox" class="rounded-sm mx-1">I hereby agree to the terms and conditions
+                                            <input required type="checkbox" id="checkbox" class="rounded-sm mx-1">I hereby agree to the<span id="tandclinks" class="text-blue-600 cursor-pointer"> terms and conditions.</span>
                                         </label> 
+                                        
                                     </div>
                                     <div class="md:mt-1 flex md:pb-1 md:p-0 p-2 w-full">
                                         <button id="submit" class="bg-slate-700 text-white w-full md:w-[50%] 
@@ -210,13 +211,76 @@
             </div>
     <!--Errors end-->
     </section>
-    
+    <div id="tandc" class=" hidden fixed w-full md:p-10 p-5 h-full top-0 left-0 z-30 flex items-center justify-center">
+        
+        <div id="backgroundLayer" class="fixed  w-full inset-0 bg-black bg-opacity-60 z-30"></div>
+      
+        <div class="modal-content bg-white border-2 border-slate-900 z-40 shadow-lg shadow-white w-auto md:w-[75%] md:h-auto h-96 overflow-y-scroll mx-auto rounded-md">
+            <div class="flex justify-between w-full px-2 md:py-1 py-2 border-b-2 border-slate-300">
+                <div class="md:text-xl text-sm font-bold ">TERMS AND CONDITIONS</div>
+                <div id="tac" class="text-slate-900 hover:text-yellow-600 focus:outline-none cursor-pointer">
+                    <ion-icon name="arrow-undo" class="md:text-2xl text-xl"></ion-icon>
+                </div>
+            </div>
+            <div class="font-normal indent-2 md:text-[16px] text-sm p-2">
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> Provide accurate and complete information: We are not liable by any wrong deliveries because of inaccurate or wrong address information that the user provided 
+                <br>
+
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> We reserve the right to accept or decline your Order for any reason.
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> Prices are in Pesos and may change without notice.
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> Various payment methods are accepted as indicated on the Site.
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> By placing an Order, you authorize Us to charge your designated payment method.
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> Shipping costs and delivery times vary.
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> Delivery dates are estimates and not guaranteed.
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> We are not responsible for carrier delays or unforeseen circumstances.
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> Orders cannot be canceled once the lanyard is in the process of creation.
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> Customized or personalized Products are non-returnable and non-exchangeable unless defective or damaged upon arrival.
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> We strive for accuracy in Product descriptions and colors but cannot guarantee exact color display due to monitor differences.
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> Provide the necessary details that you want to apply for your lanyard in the chat. 
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> We are not liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use the Site or Products.
+                Indemnification
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> You agree to indemnify, defend, and hold harmless Us, our officers, directors, employees, and agents from any claims, liabilities, damages, losses, or expenses arising from your use of the Site or Products, or your violation of these Terms.
+                Governing Law
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> These Terms are governed by the laws of Quezon City, Philippines, without regard to its conflict of law principles.
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> We reserve the right to modify these Terms at any time. Changes are effective immediately upon posting on the Site.
+                <br>
+                <ion-icon name="color-wand" class="mr-2 text-yellow-500 "></ion-icon> Continued use of the Site constitutes acceptance of the changes.
+            </div>
+        </div>
+    </div>
 
 <!--Scripts-->    
 <script type="module" src="/janeiwebsite/scripts/registration.js"></script>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script>
+    //modal confirm order
+  var tandc = document.getElementById("tandc");
+  var tandclinks = document.getElementById("tandclinks");
+  var closeBtn = document.getElementById("tac");
+  tandclinks.onclick = function() {
+    tandc.classList.remove('hidden');
+  }
+  closeBtn.onclick = function() {
+    tandc.classList.add('hidden');
+  }
 
+
+</script>
 </body>
 </html> 

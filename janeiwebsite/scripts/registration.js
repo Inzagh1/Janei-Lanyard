@@ -2,15 +2,16 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/fireba
 import { getDatabase, ref, set, get, child} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyByGsDfEcXJa2rTW0CG40XRLoa944XtI0I",
-    authDomain: "janeilanyarddb-9ba85.firebaseapp.com",
-    databaseURL: "https://janeilanyarddb-9ba85-default-rtdb.firebaseio.com",
-    projectId: "janeilanyarddb-9ba85",
-    storageBucket: "janeilanyarddb-9ba85.appspot.com",
-    messagingSenderId: "221726110604",
-    appId: "1:221726110604:web:73a171eb5277b900ca5ca9",
-    measurementId: "G-4YXSRNE3YW"
+    apiKey: "AIzaSyAVsbYPNtLVJRyin2lVtPixIK5HDUhi_M8",
+    authDomain: "janeidb-c4f19.firebaseapp.com",
+    databaseURL: "https://janeidb-c4f19-default-rtdb.firebaseio.com",
+    projectId: "janeidb-c4f19",
+    storageBucket: "janeidb-c4f19.appspot.com",
+    messagingSenderId: "1014883779092",
+    appId: "1:1014883779092:web:6fc333d075a454e96f1d01",
+    measurementId: "G-SG7JCHH82N"
   };
+  
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
